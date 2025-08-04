@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to NEXO ERP</title>
+    <title>Login to NEXO4 ERP</title>
     <link rel="stylesheet" href="/assets/frappe/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/frappe/css/desk.min.css">
     <link rel="stylesheet" href="/assets/nexo_designsystem/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="shortcut icon" href="/assets/frappe/images/favicon.png" type="image/x-icon">
+    <style>
+        .password-field {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 10;
+        }
+
+        .password-toggle:hover {
+            color: #333;
+        }
+
+        .password-field input {
+            padding-right: 40px;
+        }
+    </style>
 </head>
+
 <body class="custom-login-body">
     <div class="login-container">
         <!-- Left Side - Image/Branding -->
@@ -40,34 +69,24 @@
         <div class="login-form-section">
             <div class="login-form-container">
                 <div class="login-header">
-                    <h2>Welcome Back</h2>
-                    <p>Sign in to your NEXO ERP account</p>
+                    <h2>Welcome Back to Nexo4 ERP</h2>
+                    <p>Login to your Account</p>
                 </div>
 
                 <div id="login-message" class="alert" style="display: none;"></div>
 
                 <form id="login_form" class="login-form">
                     <div class="form-group">
-                        <label for="login_email">Email or Username</label>
-                        <input type="text"
-                               id="login_email"
-                               name="usr"
-                               class="form-control"
-                               placeholder="Enter your email or username"
-                               required
-                               autocomplete="username">
+                        <label for="login_email">Email</label>
+                        <input type="text" id="login_email" name="usr" class="form-control" placeholder="Email" required
+                            autocomplete="username">
                     </div>
 
                     <div class="form-group">
                         <label for="login_password">Password</label>
                         <div class="password-field">
-                            <input type="password"
-                                   id="login_password"
-                                   name="pwd"
-                                   class="form-control"
-                                   placeholder="Enter your password"
-                                   required
-                                   autocomplete="current-password">
+                            <input type="password" id="login_password" name="pwd" class="form-control"
+                                placeholder="Password" required autocomplete="current-password">
                             <button type="button" class="password-toggle" onclick="togglePassword()">
                                 <i class="fa fa-eye" id="password-eye"></i>
                             </button>
@@ -88,15 +107,7 @@
                             <i class="fa fa-spinner fa-spin"></i> Signing in...
                         </span>
                     </button>
-
-                    <div class="signup-link">
-                        <p>Don't have an account? <a href="/signup">Create Account</a></p>
-                    </div>
                 </form>
-
-                <div class="login-footer">
-                    <p>&copy; 2024 NEXO ERP. All rights reserved.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -118,8 +129,8 @@
         }
 
         // Handle form submission
-        $(document).ready(function() {
-            $('#login_form').on('submit', function(e) {
+        $(document).ready(function () {
+            $('#login_form').on('submit', function (e) {
                 e.preventDefault();
 
                 const email = $('#login_email').val().trim();
@@ -148,7 +159,7 @@
                         pwd: password,
                         cmd: 'login'
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.message === 'Logged In') {
                             showMessage('Login successful! Redirecting...', 'success');
                             setTimeout(() => {
@@ -159,7 +170,7 @@
                             resetLoginButton();
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         let errorMessage = 'Login failed. Please try again.';
 
                         try {
@@ -204,4 +215,5 @@
         });
     </script>
 </body>
+
 </html>
