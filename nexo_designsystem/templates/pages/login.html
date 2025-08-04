@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to NEXO ERP</title>
+    <link rel="stylesheet" href="/assets/frappe/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/frappe/css/desk.min.css">
+    <link rel="stylesheet" href="/assets/nexo_designsystem/css/login.css">
+    <link rel="shortcut icon" href="/assets/frappe/images/favicon.png" type="image/x-icon">
+</head>
+<body class="custom-login-body">
+    <div class="login-container">
+        <!-- Left Side - Image/Branding -->
+        <div class="login-image-section">
+            <div class="login-brand">
+                <div class="login-background" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
+                <div class="brand-overlay">
+                    <h1 class="brand-title">NEXO</h1>
+                    <p class="brand-subtitle">Enterprise Resource Planning</p>
+                    <div class="brand-features">
+                        <div class="feature-item">
+                            <i class="fa fa-chart-bar"></i>
+                            <span>Analytics</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa fa-users"></i>
+                            <span>Team Management</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa fa-cog"></i>
+                            <span>Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="login-form-section">
+            <div class="login-form-container">
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your NEXO ERP account</p>
+                </div>
+
+                <div id="login-message" class="alert" style="display: none;"></div>
+
+                <form id="login_form" class="login-form">
+                    <div class="form-group">
+                        <label for="login_email">Email or Username</label>
+                        <input type="text"
+                               id="login_email"
+                               name="usr"
+                               class="form-control"
+                               placeholder="Enter your email or username"
+                               required
+                               autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login_password">Password</label>
+                        <div class="password-field">
+                            <input type="password"
+                                   id="login_password"
+                                   name="pwd"
+                                   class="form-control"
+                                   placeholder="Enter your password"
+                                   required
+                                   autocomplete="current-password">
+                            <button type="button" class="password-toggle" onclick="togglePassword()">
+                                <i class="fa fa-eye" id="password-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember_me" name="remember_me" value="1">
+                            <label for="remember_me">Remember me</label>
+                        </div>
+                        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary login-btn" id="login-btn">
+                        <span class="login-text">Sign In</span>
+                        <span class="login-spinner" style="display: none;">
+                            <i class="fa fa-spinner fa-spin"></i> Signing in...
+                        </span>
+                    </button>
+
+                    <div class="signup-link">
+                        <p>Don't have an account? <a href="/signup">Create Account</a></p>
+                    </div>
+                </form>
+
+                <div class="login-footer">
+                    <p>&copy; 2024 NEXO ERP. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
+    <script src="/assets/frappe/js/lib/bootstrap.min.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('login_password');
+            const eyeIcon = document.getElementById('password-eye');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.className = 'fa fa-eye-slash';
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.className = 'fa fa-eye';
+            }
+        }
+
+        // Handle form submission
+        $(document).ready(function() {
+            $('#login_form').on('submit', function(e) {
+                e.preventDefault();
+
+                const email = $('#login_email').val().trim();
+                const password = $('#login_password').val();
+                const submitBtn = $('#login-btn');
+                const loginText = $('.login-text');
+                const loginSpinner = $('.login-spinner');
+                const messageDiv = $('#login-message');
+
+                if (!email || !password) {
+                    showMessage('Please fill in all fields', 'danger');
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.prop('disabled', true);
+                loginText.hide();
+                loginSpinner.show();
+
+                // Submit login request
+                $.ajax({
+                    url: '/api/method/login',
+                    type: 'POST',
+                    data: {
+                        usr: email,
+                        pwd: password,
+                        cmd: 'login'
+                    },
+                    success: function(response) {
+                        if (response.message === 'Logged In') {
+                            showMessage('Login successful! Redirecting...', 'success');
+                            setTimeout(() => {
+                                window.location.href = '/app';
+                            }, 1000);
+                        } else {
+                            showMessage('Login failed. Please try again.', 'danger');
+                            resetLoginButton();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = 'Login failed. Please try again.';
+
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.message) {
+                                errorMessage = response.message;
+                            } else if (response.exc_type === 'AuthenticationError') {
+                                errorMessage = 'Invalid username or password.';
+                            }
+                        } catch (e) {
+                            // Use default error message
+                        }
+
+                        showMessage(errorMessage, 'danger');
+                        resetLoginButton();
+                    }
+                });
+
+                function resetLoginButton() {
+                    submitBtn.prop('disabled', false);
+                    loginSpinner.hide();
+                    loginText.show();
+                }
+            });
+
+            function showMessage(message, type) {
+                const messageDiv = $('#login-message');
+                messageDiv.removeClass('alert-info alert-success alert-danger alert-warning');
+                messageDiv.addClass('alert-' + type);
+                messageDiv.html(message);
+                messageDiv.show();
+
+                if (type === 'success') {
+                    setTimeout(() => {
+                        messageDiv.fadeOut();
+                    }, 3000);
+                }
+            }
+
+            // Expose showMessage globally
+            window.showMessage = showMessage;
+        });
+    </script>
+</body>
+</html>
