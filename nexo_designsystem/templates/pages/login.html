@@ -5,87 +5,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to NEXO4 ERP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/assets/frappe/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/frappe/css/desk.min.css">
     <link rel="stylesheet" href="/assets/nexo_designsystem/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="shortcut icon" href="/assets/frappe/images/favicon.png" type="image/x-icon">
-    <style>
-        .password-field {
-            position: relative;
-        }
 
-        .password-toggle {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
-            color: #666;
-            cursor: pointer;
-            padding: 5px;
-            z-index: 10;
-        }
-
-        .password-toggle:hover {
-            color: #333;
-        }
-
-        .password-field input {
-            padding-right: 40px;
-        }
-    </style>
 </head>
 
 <body class="custom-login-body">
-    <div class="login-container">
-        <!-- Left Side - Image/Branding -->
-        <div class="login-image-section">
-            <div class="login-brand">
-                <div class="login-background" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
-                <div class="brand-overlay">
-                    <h1 class="brand-title">NEXO</h1>
-                    <p class="brand-subtitle">Enterprise Resource Planning</p>
-                    <div class="brand-features">
-                        <div class="feature-item">
-                            <i class="fa fa-chart-bar"></i>
-                            <span>Analytics</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa fa-users"></i>
-                            <span>Team Management</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa fa-cog"></i>
-                            <span>Automation</span>
-                        </div>
-                    </div>
+    <div class="top-logo">
+        <div class="top-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none" />
+                <rect x="6" y="7" width="2" height="6" fill="currentColor" />
+                <rect x="10" y="9" width="2" height="4" fill="currentColor" />
+                <rect x="14" y="6" width="2" height="7" fill="currentColor" />
+                <circle cx="12" cy="2" r="1" fill="currentColor" />
+            </svg>
+        </div>
+        <span class="top-logo-text">Nexo4ERP</span>
+    </div>
+
+    <div class="main-container">
+        <div class="login-wrapper">
+            <div class="illustration-section">
+                <div class="illustration">
+                    <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background circles -->
+                        <circle cx="320" cy="60" r="40" fill="#e0e7ff" opacity="0.6" />
+                        <circle cx="80" cy="240" r="30" fill="#ddd6fe" opacity="0.5" />
+
+                        <!-- Main dashboard container -->
+                        <rect x="50" y="80" width="300" height="180" rx="12" fill="white" stroke="#e2e8f0"
+                            stroke-width="2" />
+
+                        <!-- Header bar -->
+                        <rect x="50" y="80" width="300" height="40" rx="12" fill="#f8fafc" />
+                        <rect x="50" y="108" width="300" height="2" fill="#e2e8f0" />
+
+                        <!-- Header dots -->
+                        <circle cx="70" cy="100" r="4" fill="#ef4444" />
+                        <circle cx="85" cy="100" r="4" fill="#f59e0b" />
+                        <circle cx="100" cy="100" r="4" fill="#10b981" />
+
+                        <!-- Chart 1 - Bar Chart -->
+                        <rect x="70" y="140" width="80" height="60" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"
+                            rx="4" />
+                        <rect x="80" y="170" width="8" height="20" fill="#667eea" rx="2" />
+                        <rect x="92" y="160" width="8" height="30" fill="#764ba2" rx="2" />
+                        <rect x="104" y="175" width="8" height="15" fill="#667eea" rx="2" />
+                        <rect x="116" y="155" width="8" height="35" fill="#764ba2" rx="2" />
+                        <rect x="128" y="165" width="8" height="25" fill="#667eea" rx="2" />
+
+                        <!-- Chart 2 - Line Chart -->
+                        <rect x="170" y="140" width="80" height="60" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"
+                            rx="4" />
+                        <polyline points="180,180 190,170 200,175 210,160 220,165 230,155 240,160" stroke="#667eea"
+                            stroke-width="2" fill="none" />
+                        <circle cx="180" cy="180" r="2" fill="#667eea" />
+                        <circle cx="190" cy="170" r="2" fill="#667eea" />
+                        <circle cx="200" cy="175" r="2" fill="#667eea" />
+                        <circle cx="210" cy="160" r="2" fill="#667eea" />
+                        <circle cx="220" cy="165" r="2" fill="#667eea" />
+                        <circle cx="230" cy="155" r="2" fill="#667eea" />
+                        <circle cx="240" cy="160" r="2" fill="#667eea" />
+
+                        <!-- Chart 3 - Pie Chart -->
+                        <rect x="270" y="140" width="60" height="60" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"
+                            rx="4" />
+                        <circle cx="300" cy="170" r="18" fill="none" stroke="#e2e8f0" stroke-width="2" />
+                        <path d="M 300 152 A 18 18 0 0 1 318 170 L 300 170 Z" fill="#667eea" />
+                        <path d="M 318 170 A 18 18 0 0 1 300 188 L 300 170 Z" fill="#764ba2" />
+                        <path d="M 300 188 A 18 18 0 0 1 282 170 L 300 170 Z" fill="#a855f7" />
+                        <path d="M 282 170 A 18 18 0 0 1 300 152 L 300 170 Z" fill="#06b6d4" />
+
+                        <!-- Numbers and stats -->
+                        <text x="80" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b">$2.4M</text>
+                        <text x="80" y="245" font-family="Arial, sans-serif" font-size="10"
+                            fill="#64748b">Revenue</text>
+
+                        <text x="150" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b">+23%</text>
+                        <text x="150" y="245" font-family="Arial, sans-serif" font-size="10"
+                            fill="#64748b">Growth</text>
+
+                        <text x="210" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b">1,247</text>
+                        <text x="210" y="245" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Users</text>
+
+                        <text x="270" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b">98.5%</text>
+                        <text x="270" y="245" font-family="Arial, sans-serif" font-size="10"
+                            fill="#64748b">Uptime</text>
+
+                        <!-- Floating elements -->
+                        <rect x="20" y="50" width="60" height="20" rx="10" fill="white" stroke="#e2e8f0"
+                            stroke-width="1" />
+                        <text x="50" y="63" font-family="Arial, sans-serif" font-size="10" fill="#64748b"
+                            text-anchor="middle">Analytics</text>
+
+                        <rect x="320" y="200" width="50" height="20" rx="10" fill="white" stroke="#e2e8f0"
+                            stroke-width="1" />
+                        <text x="345" y="213" font-family="Arial, sans-serif" font-size="10" fill="#64748b"
+                            text-anchor="middle">Reports</text>
+
+                        <!-- Decorative arrows -->
+                        <path d="M 15 120 L 25 115 L 25 125 Z" fill="#667eea" opacity="0.6" />
+                        <path d="M 375 180 L 385 175 L 385 185 Z" fill="#764ba2" opacity="0.6" />
+                    </svg>
+                </div>
+
+                <div class="stats-text">
+                    <h3>Powerful Analytics</h3>
+                    <p>Get real-time insights into your business performance with comprehensive dashboards and reporting
+                        tools.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Right Side - Login Form -->
-        <div class="login-form-section">
-            <div class="login-form-container">
-                <div class="login-header">
-                    <h2>Welcome Back to Nexo4 ERP</h2>
-                    <p class="login-subtitle">Login to your Account</p>
+            <div class="form-section">
+                <div class="form-header">
+                    <h1 class="form-title">Welcome Back to Nexo4 ERP</h1>
+                    <p class="form-subtitle">Login to your Account</p>
                 </div>
 
-                <div id="login-message" class="alert" style="display: none;"></div>
+                <div id="login-message" class="alert"></div>
 
-                <form id="login_form" class="login-form">
+                <form id="login_form" novalidate>
                     <div class="form-group">
-                        <label for="login_email">Email</label>
-                        <input type="text" id="login_email" name="usr" class="form-control" placeholder="Email" required
+                        <label for="login_email" class="form-label">Email</label>
+                        <input type="text" id="login_email" name="usr" class="form-input" placeholder="Email" required
                             autocomplete="username">
                     </div>
 
                     <div class="form-group">
-                        <label for="login_password">Password</label>
+                        <label for="login_password" class="form-label">Password</label>
                         <div class="password-field">
-                            <input type="password" id="login_password" name="pwd" class="form-control"
+                            <input type="password" id="login_password" name="pwd" class="form-input"
                                 placeholder="Password" required autocomplete="current-password">
                             <button type="button" class="password-toggle" onclick="togglePassword()">
                                 <i class="fa fa-eye" id="password-eye"></i>
@@ -98,12 +159,14 @@
                             <input type="checkbox" id="remember_me" name="remember_me" value="1">
                             <label for="remember_me">Remember me</label>
                         </div>
-                        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                        <div class="forgot-password">
+                            <a href="/forgot-password">Forgot Password?</a>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary login-btn" id="login-btn">
+                    <button type="submit" class="login-button" id="login-btn">
                         <span class="login-text">Login</span>
-                        <span class="login-spinner" style="display: none;">
+                        <span class="login-spinner">
                             <i class="fa fa-spinner fa-spin"></i> Signing in...
                         </span>
                     </button>
